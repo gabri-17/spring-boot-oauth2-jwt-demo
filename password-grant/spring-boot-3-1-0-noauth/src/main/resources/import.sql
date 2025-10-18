@@ -1,5 +1,5 @@
-INSERT INTO tb_user (name, email, password) VALUES ('Alex', 'alex@gmail.com', '123456');
-INSERT INTO tb_user (name, email, password) VALUES ('Maria', 'maria@gmail.com', '123456');
+INSERT INTO tb_user (name, email, password) VALUES ('Alex', 'alex@gmail.com', '$2a$10$EpaO30kzcmhR2xC92MjQieah.xBUFXqyCfXKS/NBIQBvckTaN5oKG');
+INSERT INTO tb_user (name, email, password) VALUES ('Maria', 'maria@gmail.com', '$2a$10$EpaO30kzcmhR2xC92MjQieah.xBUFXqyCfXKS/NBIQBvckTaN5oKG');
 
 -- Padrão do spring secutiry é usar ROLE_ antes do nome do papel.
 INSERT INTO tb_role (authority) VALUES ('ROLE_OPERATOR');
