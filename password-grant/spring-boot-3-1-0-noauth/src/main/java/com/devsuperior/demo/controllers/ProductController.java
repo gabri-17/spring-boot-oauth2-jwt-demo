@@ -23,19 +23,19 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 
-	@GetMapping
+	@GetMapping // Buscar todos os produtos
 	public ResponseEntity<List<ProductDTO>> findAll() {
 		List<ProductDTO> list = productService.findAll();
 		return ResponseEntity.ok(list);
 	}
 	
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/{id}") // Buscar um produto por ID
     public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
         ProductDTO dto = productService.findById(id);
         return ResponseEntity.ok(dto);
     }
 	
-    @PostMapping
+    @PostMapping // Inserir um novo produto.
     public ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO dto) {
         dto = productService.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")

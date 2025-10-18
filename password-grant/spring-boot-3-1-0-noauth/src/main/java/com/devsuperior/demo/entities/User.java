@@ -1,14 +1,11 @@
 package com.devsuperior.demo.entities;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_user")
@@ -22,6 +19,13 @@ public class User {
     @Column(unique = true)
     private String email;
     private String password;
+
+    @ManyToMany
+    @JoinTable(name = "tb_user_role", // Tabela de associação entre User e Role.
+            joinColumns = @JoinColumn(name = "user_id"), // Chave estrangeira da entidade atual (User).
+            inverseJoinColumns = @JoinColumn(name = "role_id")) // Chave estrangeira da outra entidade (Role).
+    private Set<Role> roles = new HashSet<>(); // Coleção que não permite duplicatas.
+
 
     public User() {
     }
@@ -73,6 +77,21 @@ public class User {
         User user = (User) o;
 
         return Objects.equals(id, user.id);
+    }
+
+    public boolean hasRole(String roleName) {
+        //return roles.stream().anyMatch(role -> role.getAuthority().equals(roleName));
+        for (Role role : roles) {
+            // Lógica para verificar se o usuário possui o perfil (role) especificado.
+            if (role.getAuthority().equals(roleName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addRole(Role role) {
+        roles.add(role);
     }
 
     @Override
